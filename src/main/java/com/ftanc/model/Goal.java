@@ -1,15 +1,36 @@
 package com.ftanc.model;
 
+
 /**
  * Created by ftanc on 25/09/2016.
  */
-public class Goal {
-    private int id;
-    private String content;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.time.LocalDateTime;
 
-    public Goal(int id, String content) {
+@Entity
+@Table(name = "Goals")
+public class Goal {
+
+    @Id
+    private int id;
+    @Column(name = "description")
+    private String description;
+    @Column(nullable = false, name = "createdAt")
+    private LocalDateTime createdAt;
+    @Column(name = "dueTo")
+    private LocalDateTime dueTo;
+    @Column(name = "isCompleted")
+    private boolean isCompleted = false;
+
+    public Goal(int id, String description, LocalDateTime createdAt, LocalDateTime dueTo, boolean isCompleted) {
         this.id = id;
-        this.content = content;
+        this.description = description;
+        this.createdAt = createdAt;
+        this.dueTo = dueTo;
+        this.isCompleted = isCompleted;
     }
 
     public int getId() {
@@ -20,11 +41,35 @@ public class Goal {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public String getDescription() {
+        return description;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getDueTo() {
+        return dueTo;
+    }
+
+    public void setDueTo(LocalDateTime dueTo) {
+        this.dueTo = dueTo;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
     }
 }

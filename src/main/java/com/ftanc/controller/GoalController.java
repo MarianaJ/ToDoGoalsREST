@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -18,8 +19,8 @@ public class GoalController {
     private final AtomicInteger counter = new AtomicInteger();
 
     @RequestMapping(value = "/find", method = RequestMethod.GET)
-    public Goal findGoal(@RequestParam(value = "name", defaultValue = "World") String name){
-        return new Goal(counter.incrementAndGet(),
-                        String.format(template, name));
+    public Goal findGoal(){
+        return Goal;
     }
+
 }
