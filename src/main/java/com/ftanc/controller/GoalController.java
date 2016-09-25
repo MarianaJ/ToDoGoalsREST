@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -20,7 +21,7 @@ public class GoalController {
 
     @RequestMapping(value = "/find", method = RequestMethod.GET)
     public Goal findGoal(){
-        return Goal;
+        return new Goal(1,"my first goal",LocalDateTime.now(),LocalDateTime.now(),false);
     }
 
 }
