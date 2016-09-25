@@ -4,10 +4,7 @@ package com.ftanc.model;
 /**
  * Created by ftanc on 25/09/2016.
  */
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,6 +12,7 @@ import java.time.LocalDateTime;
 public class Goal {
 
     @Id
+    @GeneratedValue
     private int id;
     @Column(name = "description")
     private String description;
