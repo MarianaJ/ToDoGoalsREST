@@ -1,4 +1,4 @@
-package com.ftanc.service;
+package com.ftanc.repository;
 
 import com.ftanc.model.Goal;
 import org.springframework.stereotype.Repository;
