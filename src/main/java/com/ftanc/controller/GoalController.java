@@ -1,6 +1,9 @@
 package com.ftanc.controller;
 
 import com.ftanc.model.Goal;
+import com.ftanc.service.GoalService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,12 +19,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 @RequestMapping("/goal")
 @RestController
 public class GoalController {
-    private static final String template = "Hello, %s!";
-    private final AtomicInteger counter = new AtomicInteger();
+    private GoalService goalService;
 
-    @RequestMapping(value = "/find", method = RequestMethod.GET)
-    public Goal findGoal(){
-        return new Goal(1,"my first goal",LocalDateTime.now(),LocalDateTime.now(),false);
+    @Autowired
+    @Qualifier(value = "goalService")
+    public void setGoalService(GoalService goalService){
+        this.goalService = goalService;
     }
 
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public Goal findGoal(){
+
+    }
 }
