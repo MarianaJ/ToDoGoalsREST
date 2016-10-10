@@ -1,16 +1,12 @@
 package com.ftanc.repository;
 
 import com.ftanc.model.Goal;
-
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
- * Created by ftanc on 25/09/2016.
+ * Created by ftanc on 10/10/2016.
  */
-public interface GoalRepository {
-    void addGoal(Goal goal);
-    void updateGoal(Goal goal);
-    List<Goal> listAllGoals();
-    Goal getGoalById(int id);
-    void removeGoal(int id);
+@Repository(value = "goalRepository")
+public interface GoalRepository extends JpaRepository<Goal, Long> {
 }

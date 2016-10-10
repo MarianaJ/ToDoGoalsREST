@@ -13,25 +13,24 @@ public class Goal {
 
     @Id
     @GeneratedValue
-    private int id;
-    @Column(name = "description")
+    private long id;
+    @Column
     private String description;
-    @Column(nullable = false, name = "createdAt")
+    @Column
     private LocalDateTime createdAt;
-    @Column(name = "dueTo")
+    @Column
     private LocalDateTime dueTo;
-    @Column(name = "isCompleted")
-    private boolean isCompleted = false;
+    @Column
+    private boolean isCompleted;
 
-    public Goal(int id, String description, LocalDateTime createdAt, LocalDateTime dueTo, boolean isCompleted) {
-        this.id = id;
+    public Goal(String description, LocalDateTime dueTo) {
         this.description = description;
-        this.createdAt = createdAt;
+        this.createdAt = LocalDateTime.now();
         this.dueTo = dueTo;
-        this.isCompleted = isCompleted;
+        this.isCompleted = false;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -51,10 +50,6 @@ public class Goal {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public LocalDateTime getDueTo() {
         return dueTo;
     }
@@ -69,5 +64,9 @@ public class Goal {
 
     public void setCompleted(boolean completed) {
         isCompleted = completed;
+    }
+
+    public Goal(){
+
     }
 }
