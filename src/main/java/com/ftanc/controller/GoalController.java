@@ -5,10 +5,7 @@ import com.ftanc.repository.GoalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.orm.hibernate4.HibernateJdbcException;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,12 +21,11 @@ public class GoalController {
     private GoalRepository goalRepository;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<Goal> listAllGoals(){
+    public List<Goal> getAllGoals(){
         return goalRepository.findAll();
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.PUT)
-    @ResponseBody
     public String addNewGoal(){
         Goal goal;
         String description = "Dupa Jas";
@@ -37,8 +33,13 @@ public class GoalController {
             goal = new Goal(description, LocalDateTime.now());
             goalRepository.save(goal);
         }catch (HibernateJdbcException e){
-            return "Goal not created" + e.getSql();
+            return "Something went wrong " + e.getSql();
         }
         return "Goal created" + goal.getId();
+    }
+
+    @RequestMapping(value = "/get/{goalId}", method = RequestMethod.GET)
+    public Goal getOneGoal(@PathVariable Long goalId){
+        return goalRepository.findOne(goalId);
     }
 }
