@@ -21,25 +21,35 @@ public class GoalController {
     private GoalRepository goalRepository;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<Goal> getAllGoals(){
+    public List<Goal> getAllGoals() {
         return goalRepository.findAll();
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.PUT)
-    public String addNewGoal(){
+    public String addNewGoal() {
         Goal goal;
-        String description = "Dupa Jas";
-        try{
+        String description = "Chyab dziala";
+        try {
             goal = new Goal(description, LocalDateTime.now());
             goalRepository.save(goal);
-        }catch (HibernateJdbcException e){
+        } catch (HibernateJdbcException e) {
             return "Something went wrong " + e.getSql();
         }
         return "Goal created" + goal.getId();
     }
 
     @RequestMapping(value = "/get/{goalId}", method = RequestMethod.GET)
-    public Goal getOneGoal(@PathVariable Long goalId){
+    public Goal getOneGoal(@PathVariable Long goalId) {
         return goalRepository.findOne(goalId);
+    }
+
+    @RequestMapping(value = "/remove/{goalId}", method = RequestMethod.DELETE)
+    public String removeGoal(@PathVariable Long goalId){
+        try {
+            goalRepository.delete(goalId);
+        }catch (HibernateJdbcException e){
+            return "Something went wrong, sorry";
+        }
+        return "Goal " + goalId + " was removed";
     }
 }
